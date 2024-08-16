@@ -10,7 +10,7 @@ def get_lines(topic, language):
         messages=[
             {
                 "role": "system",
-                "content": f"I will provide you a {topic}. Your task is to generate a sentence with approximately 500 characters in {language}. In your output include only the sentence, nothing else."
+                "content": f"I will provide you a topic. Your task is to generate a sentence with approximately 500 characters in {language}. In your output include only the sentence, nothing else."
             },
             {
                 "role": "user",

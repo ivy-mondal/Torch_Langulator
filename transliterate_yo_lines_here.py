@@ -9,7 +9,7 @@ def transliterate(yo_sentence):
         temperature=0,
         messages=[
             {"role": "system",
-             "content": f" I wil give you a sentence. Your task is to transliterate the given sentence to Latin script. Transliterate phonetically, in transliteration, use english letters and spaces only. Only give the transliterated sentence, nothing else."
+             "content": f"I wil give you a sentence. Your task is to transliterate the given sentence to the Latin script. Transliterate phonetically, exactly how it is pronounced. In the transliteration, use 26 English letters and spaces only. Only give the transliterated sentence, nothing else."
              },
             {"role": "user",
              "content": f"{yo_sentence}"}

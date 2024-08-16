@@ -1,4 +1,5 @@
 import random
+import json
 from get_yo_topics_here import get_random_topic
 from get_yo_lines_here import get_lines
 from transliterate_yo_lines_here import transliterate
@@ -14,12 +15,16 @@ def things_I_do_to_get_dataset():
     return [language, yo_data]
 
 
-def now_do_it_10_times():
+def now_do_it_1000_times():
     result = []
-    for i in range(10):
+    for i in range(1000):
         data = things_I_do_to_get_dataset()
+        print(data, i)
         result.append(data)
+        with open("dataset.json", mode='w', encoding='utf-8') as f:
+            f.write(json.dumps(result, indent=4,  ensure_ascii=False))
     return result
 
+now_do_it_1000_times()
 
-print(now_do_it_10_times())
+#print(now_do_it_10_times())
