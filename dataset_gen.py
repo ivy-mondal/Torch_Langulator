@@ -1,8 +1,9 @@
+#combine em all to get data
 import random
 import json
-from get_yo_topics_here import get_random_topic
-from get_yo_lines_here import get_lines
-from transliterate_yo_lines_here import transliterate
+from topic_gen import get_random_topic
+from sentence_gen import get_lines
+from transliterator import transliterate
 
 lang_list = ["Bengali", "Russian", "English", "Mandarin", "Spanish", "Hindi", "Arabic", "Japanese", "Korean", "French", "German", "Italian", "Portuguese", "Dutch", "Greek", "Swedish", "Turkish", "Swahili", "Vietnamese", "Thai", "Indonesian"]
 
