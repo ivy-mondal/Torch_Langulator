@@ -25,7 +25,7 @@ def replace_punctuation(text):
 
 
 def fix_da_data():
-    with open('dataset.json', 'r', encoding='utf-8') as file:
+    with open('datasets/dataset.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
 
     correct_data = []
@@ -48,7 +48,7 @@ def fix_da_data():
                         pesky_lil_piece_of_shi += (char)
 
 
-    with open("correct_data.json", mode='w', encoding='utf-8') as f:
+    with open("datasets/correct_data.json", mode='w', encoding='utf-8') as f:
         f.write(json.dumps(correct_data, indent=4, ensure_ascii=False))
 
     print(pesky_lil_piece_of_shi)
