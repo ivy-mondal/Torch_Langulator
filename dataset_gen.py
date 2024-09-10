@@ -26,6 +26,6 @@ def now_do_it_1000_times():
             f.write(json.dumps(result, indent=4,  ensure_ascii=False))
     return result
 
-now_do_it_1000_times()
+#now_do_it_1000_times()
 
 #print(now_do_it_10_times())

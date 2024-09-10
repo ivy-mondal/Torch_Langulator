@@ -6,7 +6,7 @@ import json
 
 def make_tensor_dataset(dataset_name: str):
     with open("datasets//" + dataset_name + "_data.json", 'r', encoding='utf-8') as file:
-        data = json.load((file))
+        data = json.load(file)
     languages = [item[0] for item in data]
     lines = [item[1] for item in data]
     unique_langs = sorted(list(set(languages)))
@@ -21,7 +21,7 @@ def make_tensor_dataset(dataset_name: str):
         for i in range(0, len(line), 1):
             sample = line[i:i + 16]
             if len(sample) == 16:
-               examples.append(sample)
+                examples.append(sample)
             else:
                 pass
 
@@ -41,9 +41,6 @@ def make_tensor_dataset(dataset_name: str):
             one_hot_samples_X.append(one_hot_vector_X)
             one_hot_samples_Y.append(one_hot_vector_Y)
 
-
-
-
     X_tensor = torch.stack(one_hot_samples_X)
     Y_tensor = torch.stack(one_hot_samples_Y)
     #print(X_tensor.shape)
@@ -51,4 +48,5 @@ def make_tensor_dataset(dataset_name: str):
 
     return X_tensor, Y_tensor
 
-print(make_tensor_dataset("test"))
+
+#print(make_tensor_dataset("test"))

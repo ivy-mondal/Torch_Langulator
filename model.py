@@ -14,13 +14,18 @@ class Langulator(nn.Module):
         #Last layer
         self.classifier = nn.Linear(neuron_num, lang_num)
         self.relu = nn.ReLU()
+        #self.bn = nn.BatchNorm1d
         #self.softmax = nn.Softmax(dim=1)
 
     def forward(self,x):
-        x = self.relu(self.embedding(x))
+        x = self.embedding(x)
+        #print(x.shape)
         x = x.view(x.size(0), -1)
+        #print(x.shape)
         x = self.relu(self.middle(x))
+        #print(x.shape)
         x = self.classifier(x)
+        #print(x.shape)
 
         return x
 
@@ -28,6 +33,6 @@ class Langulator(nn.Module):
 
 
 
-model = Langulator()
-X, Y = make_tensor_dataset('test')#get yo data
-output = model(X)
+#model = Langulator()
+#X, Y = make_tensor_dataset('test')#get yo data
+#output = model(X)
