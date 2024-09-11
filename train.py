@@ -23,21 +23,34 @@ def train_lil_dura(model, x_train, y_train, x_test, y_test, epochs, learning_rat
             test_outputs = model(x_test)
             test_loss = criterion(test_outputs, y_test)
 
-        train_losses.append(train_loss)
-        test_losses.append(test_loss)
+        train_losses.append(train_loss.item())
+        test_losses.append(test_loss.item())
 
-        print(f"round {epoch+1}/{epochs}, Train loss: {train_loss.item():.4f}, Test loss: {test_loss.item():.4f}")
+        print(f"round {epoch + 1}/{epochs}, Train loss: {train_loss.item():.4f}, Test loss: {test_loss.item():.4f}", flush=True)
 
-    torch.save(model.state_dict(), "langulator_brain.pth")
+        if (epoch + 1) % 100 == 0:
+            torch.save(model.state_dict(), f"langulator_brain_epoch_{epoch + 1}.pth")
 
-    plt.plot(train_losses, label="Train Loss")
-    plt.plot(test_losses, label="Test Loss")
-    plt.xlabel('round')
-    plt.ylabel('Loss')
-    plt.title("pain and suffering of Durachok")
-    plt.legend()
-    plt.show()
+            plt.clf()  # Clear the current figure
+            plt.plot(train_losses, label="Train Loss")
+            plt.plot(test_losses, label="Test Loss")
+            plt.xlabel('round')
+            plt.ylabel('Loss')
+            current_lr = optimizer.param_groups[0]['lr']
+            plt.title(f"pain and suffering of Durachok\nround: {epoch + 1}, Learning Rate: {current_lr:.6f}")
 
+            plt.legend()
+            plt.show()
 
+        torch.save(model.state_dict(), "langulator_brain.pth")
 
-
+        # Final plot
+        plt.clf()
+        plt.plot(train_losses, label="Train Loss")
+        plt.plot(test_losses, label="Test Loss")
+        plt.xlabel('round')
+        plt.ylabel('Loss')
+        plt.title("pain and suffering of Durachok")
+        plt.legend()
+        plt.show()
+        torch.save(model.state_dict(), "langulator_brain.pth")

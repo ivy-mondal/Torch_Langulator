@@ -8,4 +8,4 @@ x_test, y_test = make_tensor_dataset('test')
 model = Langulator()
 
 if __name__ == "__main__":
-    train_lil_dura(model, x_train, y_train, x_test, y_test, 100, 0.001)
+    train_lil_dura(model, x_train, y_train, x_test, y_test, 300, 0.01)
