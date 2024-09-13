@@ -1,8 +1,19 @@
 import matplotlib.pyplot as plt
 import torch
+import os
 
 
-def train_lil_dura(model, x_train, y_train, x_test, y_test, epochs, learning_rate):
+def ask_user():
+    print("1: for continuing checkpoint and 2: for starting fresh")
+    choice = input("1 or 2:")
+
+    if choice == '2':
+        checkpoint_name = input("langulator_brain_epoch_xxx.pth")
+        return choice, checkpoint_name
+    return choice, None
+
+
+def train_lil_dura(model, x_train, y_train, x_test, y_test, epochs, learning_rate, checkpoint_name=None):
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
     criterion = torch.nn.CrossEntropyLoss()
 
@@ -10,6 +21,16 @@ def train_lil_dura(model, x_train, y_train, x_test, y_test, epochs, learning_rat
     test_losses = []
     train_accuracies = []
     test_accuracies = []
+
+    start_epoch = 0
+    if checkpoint_name:
+        if os.path.exists(checkpoint_name):
+            checkpoint = torch.load(checkpoint_name)
+            model.load_state_dict(checkpoint)
+            start_epoch = int(checkpoint_name.split('_')[-1].split('.')[0])
+            print(f"Resuming from epoch {start_epoch}")
+        else:
+            print(f"Oops! Couldn't find {checkpoint_name}. Starting from scratch!")
 
     for epoch in range(epochs):
         model.train()
