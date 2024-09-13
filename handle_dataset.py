@@ -4,7 +4,7 @@ import string
 import json
 
 
-def make_tensor_dataset(dataset_name: str):
+def make_tensor_dataset(dataset_name: str, context_size=32):
     with open("datasets//" + dataset_name + "_data.json", 'r', encoding='utf-8') as file:
         data = json.load(file)
     languages = [item[0] for item in data]
@@ -19,13 +19,13 @@ def make_tensor_dataset(dataset_name: str):
         examples = []
         language = languages[lines.index(line)]
         for i in range(0, len(line), 1):
-            sample = line[i:i + 16]
-            if len(sample) == 16:
+            sample = line[i:i + context_size]
+            if len(sample) == context_size:
                 examples.append(sample)
             else:
                 pass
 
-        #print(len(examples))
+        # print(len(examples))
 
         for sample in examples:
 
@@ -43,10 +43,9 @@ def make_tensor_dataset(dataset_name: str):
 
     X_tensor = torch.stack(one_hot_samples_X)
     Y_tensor = torch.stack(one_hot_samples_Y)
-    #print(X_tensor.shape)
-    #print(Y_tensor.shape)
+    # print(X_tensor.shape)
+    # print(Y_tensor.shape)
 
     return X_tensor, Y_tensor
 
-
-#print(make_tensor_dataset("test"))
+# print(make_tensor_dataset("test"))
