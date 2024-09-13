@@ -7,8 +7,8 @@ def ask_user():
     print("1: for continuing checkpoint and 2: for starting fresh")
     choice = input("1 or 2:")
 
-    if choice == '2':
-        checkpoint_name = input("langulator_brain_epoch_xxx.pth")
+    if choice == '1':
+        checkpoint_name = input("langulator_brain_epoch_xxx.pth:")
         return choice, checkpoint_name
     return choice, None
 
